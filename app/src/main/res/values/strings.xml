@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Lightify</string>
+
+    <!-- Bridge Discovery -->
+    <string name="discovering_bridges">Discovery Philips Hue Bridges on Local Network…</string>
+    <string name="discovered_bridges">Discovered Bridges :</string>
+    <string name="discovery_bridges_error">An Error Occurred while Discovering Bridges</string>
+
+    <string name="no_bridge_name">Empty Name</string>
+
+    <!-- Bridge Onboarding -->
+    <string name="onboard">Onboard</string>
+    <string name="press_hue_prompt_title">Press Hue Bridge Before Onboarding</string>
+    <string name="onboarding_success_toast">The bridge is onboarded</string>
+    <string name="onboarding_error_toast">An Error Occurred when Onboarding</string>
+    <string name="onboarding_success">Congratulations! Your Philips Hue Bridge is now onboarded.\nYou can now start music party with light show.</string>
+    <string name="bridge_info">Bridge Name : %1$s, MAC : %2$s, IP : %3$s</string>
+    <string name="user_id_info">User ID : %s</string>
+    <string name="start_control">Start Control</string>
+</resources>

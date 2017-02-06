@@ -29,6 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -257,10 +259,14 @@ public class PhilipsHueService {
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
     private static final String PATH_LIGHTS = "lights";
+    private static final String PATH_STATE = "state";
 
     public interface LightApi{
         @GET(PATH_LIGHTS)
         Observable<List<LightItem>> getLights();
+
+        @PUT(PATH_LIGHTS + "/{id}/" + PATH_STATE)
+        Observable<List<LightStateResponse>> setLightState(@Path("id") String id, @Body LightItem.StateRequest request);
     }
 
     private static LightApi mSharedLightService;
@@ -291,6 +297,35 @@ public class PhilipsHueService {
         mSharedLightService = null;
     }
 
+    /**
+     * Response Objects
+     */
+    public static class LightStateResponse{
+
+        public static final String KEY_SUCCESS = "success";
+        public static final String KEY_ERROR = "error";
+
+        @SerializedName(KEY_SUCCESS)
+        @Expose
+        private @Nullable Map<String, Object> success;
+
+        @SerializedName(KEY_ERROR)
+        @Expose
+        private @Nullable Map<String, Object> error;
+
+        public Map<String, Object> response() {
+            return success;
+        }
+
+        public Map<String, Object> error(){
+            return error;
+        }
+    }
+
+    /**
+     * Returns a GSON object with custom Light Item deserializer.
+     * @return
+     */
     private static Gson gsonForLightItems(){
         Type listType = new TypeToken<List<LightItem>>(){}.getType();
         return new GsonBuilder()
@@ -298,6 +333,11 @@ public class PhilipsHueService {
                 .create();
     }
 
+    /**
+     * A custom Deserializer written for {@link LightItem}.
+     * The JSON response from Philips Hue Bridge uses "key" as the ID of light item.
+     * A custom Gson deserializer is needed to parse light item correctly.
+     */
     private static class LightItemGSONDeserializer implements JsonDeserializer<List<LightItem>>{
         @Override
         public List<LightItem> deserialize(JsonElement element, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

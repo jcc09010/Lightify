@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.apis.philips.hue.LightItem;
+import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
+import com.sideprojects.jc.lightify.view.MarginItemDecoration;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -21,6 +23,8 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 
 public class LightsFragment extends Fragment{
+
+    public static final String TAG = LightsFragment.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
     private LightItemAdapter mAdapter;
@@ -41,6 +45,8 @@ public class LightsFragment extends Fragment{
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        mRecyclerView.addItemDecoration(
+                new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.list_item_margin)));
         return root;
     }
 
@@ -48,6 +54,25 @@ public class LightsFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setItemActionListener(new LightItemAdapter.ItemActionListener() {
+            @Override
+            public void onItemClicked(LightItem item) {
+
+            }
+
+            @Override
+            public void onItemSwitched(LightItem item, boolean isOn) {
+                LightItem.RequestBuilder builder = LightItem.RequestBuilder.start()
+                        .setOn(isOn)
+                        .setTransitionTime(10);
+                if(isOn){
+                    builder.setBrightness(254);
+                }
+                PhilipsHueService.lightService().setLightState(item.id(), builder.build())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(responses -> {}, Throwable::printStackTrace);
+            }
+        });
     }
 
     @Override

@@ -1,10 +1,17 @@
 package com.sideprojects.jc.lightify.apis.philips.hue;
 
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by justin.chu on 2/5/17.
@@ -128,6 +135,7 @@ public class LightItem {
         public static final String KEY_ALERT = "alert";
         public static final String KEY_COLOR_MODE = "colormode";
         public static final String KEY_REACHABLE = "reachable";
+        public static final String KEY_TRANSITION_TIME = "transitiontime";
 
         @SerializedName(KEY_ON)
         @Expose
@@ -215,6 +223,89 @@ public class LightItem {
 
         public boolean isReachable() {
             return reachable;
+        }
+    }
+
+    public static class StateRequest {
+        @SerializedName(State.KEY_ON)
+        public Boolean on;
+
+        @SerializedName(State.KEY_BRIGHTNESS)
+        public Integer brightness;
+
+        @SerializedName(State.KEY_HUE)
+        public Integer hue;
+
+        @SerializedName(State.KEY_SATURATION)
+        public Integer saturation;
+
+        @SerializedName(State.KEY_ALERT)
+        public String alert;
+
+        @SerializedName(State.KEY_EFFECT)
+        public String effect;
+
+        @SerializedName(State.KEY_COLOR_TEMP)
+        public Integer colorTemp;
+
+        @SerializedName(State.KEY_TRANSITION_TIME)
+        public Integer transitionTime;
+    }
+
+    public static class RequestBuilder {
+
+        private StateRequest request;
+
+        public static RequestBuilder start(){
+            return new RequestBuilder();
+        }
+
+        public RequestBuilder(){
+            request = new StateRequest();
+        }
+
+        public RequestBuilder setOn(boolean on){
+            request.on = on;
+            return this;
+        }
+
+        public RequestBuilder setBrightness(@IntRange(from=-254,to=254) int brightness){
+            request.brightness = brightness;
+            return this;
+        }
+
+        public RequestBuilder setHue(@IntRange(from=-65534,to=65534) int hue){
+            request.hue = hue;
+            return this;
+        }
+
+        public RequestBuilder setSaturation(@IntRange(from=-254,to=254) int saturation){
+            request.saturation = saturation;
+            return this;
+        }
+
+        public RequestBuilder setAlert(String alert){
+            request.alert = alert;
+            return this;
+        }
+
+        public RequestBuilder setEffect(String effect){
+            request.effect = effect;
+            return this;
+        }
+
+        public RequestBuilder setColorTemperature(@IntRange(from=-65534,to=65534) int temp){
+            request.colorTemp = temp;
+            return this;
+        }
+
+        public RequestBuilder setTransitionTime(int deciseconds){
+            request.transitionTime = deciseconds;
+            return this;
+        }
+
+        public StateRequest build(){
+            return request;
         }
     }
 }

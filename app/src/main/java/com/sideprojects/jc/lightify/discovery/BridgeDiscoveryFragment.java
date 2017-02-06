@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.view.MarginItemDecoration;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,8 @@ public class BridgeDiscoveryFragment extends Fragment {
                 new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         mRecyclerViewBridges.addItemDecoration(
                 new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL));
+        mRecyclerViewBridges.addItemDecoration(
+                new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.list_item_margin)));
         mRecyclerViewBridges.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         mAdapter.setItemClickListener(bridge -> ((DiscoveryActivity) getActivity()).startOnboarding(bridge));

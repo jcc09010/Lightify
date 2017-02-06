@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.sideprojects.jc.lightify.apis.philips.hue.LightItem;
@@ -18,7 +19,13 @@ import java.util.List;
 
 public class LightItemAdapter extends RecyclerView.Adapter<LightItemAdapter.ItemHolder> {
 
+    public interface ItemActionListener{
+        void onItemClicked(LightItem item);
+        void onItemSwitched(LightItem item, boolean isOn);
+    }
+
     private List<LightItem> mItems;
+    private ItemActionListener mListener;
 
     public LightItemAdapter(){
         mItems = new ArrayList<>();
@@ -27,6 +34,10 @@ public class LightItemAdapter extends RecyclerView.Adapter<LightItemAdapter.Item
     public void setItems(List<LightItem> items){
         mItems.clear();
         mItems.addAll(items);
+    }
+
+    public void setItemActionListener(ItemActionListener listener){
+        mListener = listener;
     }
 
     public List<LightItem> getItems(){
@@ -54,7 +65,7 @@ public class LightItemAdapter extends RecyclerView.Adapter<LightItemAdapter.Item
         return mItems.size();
     }
 
-    public static class ItemHolder extends RecyclerView.ViewHolder{
+    public class ItemHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
 
         private TextView title;
         private SwitchCompat switchButton;
@@ -63,6 +74,17 @@ public class LightItemAdapter extends RecyclerView.Adapter<LightItemAdapter.Item
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.textview_title);
             switchButton = (SwitchCompat) itemView.findViewById(R.id.switch_button);
+            switchButton.setOnCheckedChangeListener(this);
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(getAdapterPosition() > -1 && getAdapterPosition() < mItems.size()){
+                // Only notify when user actually clicks on the switch.
+                if(buttonView.isPressed()) {
+                    mListener.onItemSwitched(mItems.get(getAdapterPosition()), isChecked);
+                }
+            }
         }
     }
 }

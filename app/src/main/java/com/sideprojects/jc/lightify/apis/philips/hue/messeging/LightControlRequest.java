@@ -4,6 +4,7 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 
 import com.google.gson.annotations.SerializedName;
+import com.sideprojects.jc.lightify.apis.philips.hue.data.Constants;
 import com.sideprojects.jc.lightify.apis.philips.hue.data.LightState;
 
 /**
@@ -54,23 +55,28 @@ public class LightControlRequest {
             return this;
         }
 
-        public Builder setBrightness(@IntRange(from=-254,to=254) int brightness){
+        public Builder setBrightness(@IntRange(from=Constants.Brightness.MIN,to=Constants.Brightness.MAX)
+                                             int brightness){
             request.brightness = brightness;
             return this;
         }
 
-        public Builder setHue(@IntRange(from=-65534,to=65534) int hue){
+        public Builder setHue(@IntRange(from=Constants.Hue.MIN,to=Constants.Hue.MAX)
+                                      int hue){
             request.hue = hue;
             return this;
         }
 
-        public Builder setSaturation(@IntRange(from=-254,to=254) int saturation){
+        public Builder setSaturation(@IntRange(from=Constants.Saturation.MIN,to=Constants.Saturation.MAX)
+                                             int saturation){
             request.saturation = saturation;
             return this;
         }
 
-        public Builder setXY(@FloatRange(from=0.0f,to=1.0f) float x,
-                             @FloatRange(from=0.0f,to=1.0f) float y){
+        public Builder setXY(@FloatRange(from=Constants.Color.X_MIN,
+                                        to=Constants.Color.X_MAX) float x,
+                             @FloatRange(from=Constants.Color.Y_MIN,
+                                        to=Constants.Color.Y_MAX) float y){
             request.xy = new Float[]{x, y};
             return this;
         }
@@ -85,7 +91,8 @@ public class LightControlRequest {
             return this;
         }
 
-        public Builder setColorTemperature(@IntRange(from=-65534,to=65534) int temp){
+        public Builder setColorTemperature(@IntRange(from=Constants.Color.TEMP_MIN,to=Constants.Color.TEMP_MAX)
+                                                   int temp){
             request.colorTemp = temp;
             return this;
         }

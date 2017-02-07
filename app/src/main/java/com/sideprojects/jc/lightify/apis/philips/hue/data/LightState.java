@@ -58,17 +58,17 @@ public class LightState implements Parcelable {
         return isOn;
     }
 
-    @IntRange(from=-254,to=254)
+    @IntRange(from=Constants.Brightness.MIN, to=Constants.Brightness.MAX)
     public int brightness() {
         return brightness;
     }
 
-    @IntRange(from=-65534,to=65534)
+    @IntRange(from=Constants.Hue.MIN, to=Constants.Hue.MAX)
     public int hue() {
         return hue;
     }
 
-    @IntRange(from=-254,to=254)
+    @IntRange(from=Constants.Saturation.MIN, to=Constants.Saturation.MAX)
     public int saturation() {
         return saturation;
     }
@@ -81,17 +81,17 @@ public class LightState implements Parcelable {
         return xy;
     }
 
-    @FloatRange(from=0.0f,to=1.0f)
+    @FloatRange(from=Constants.Color.X_MIN, to=Constants.Color.X_MAX)
     public float x() {
         return xy[0];
     }
 
-    @FloatRange(from=0.0f,to=1.0f)
+    @FloatRange(from=Constants.Color.Y_MIN, to=Constants.Color.Y_MAX)
     public float y() {
         return xy[1];
     }
 
-    @IntRange(from=-65534,to=65534)
+    @IntRange(from=Constants.Color.TEMP_MIN, to=Constants.Color.TEMP_MAX)
     public int colorTemperature() {
         return colorTemperature;
     }

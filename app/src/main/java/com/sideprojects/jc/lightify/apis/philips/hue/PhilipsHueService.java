@@ -107,8 +107,12 @@ public class PhilipsHueService {
     private static final String PATH_STATE = "state";
 
     public interface LightApi{
+
         @GET(PATH_LIGHTS)
         Observable<List<LightItem>> getLights();
+
+        @GET(PATH_LIGHTS + "/{id}")
+        Observable<LightItem> getLight(@Path("id") String id);
 
         @PUT(PATH_LIGHTS + "/{id}/" + PATH_STATE)
         Observable<List<LightControlResponse>> setLightState(@Path("id") String id, @Body LightControlRequest request);

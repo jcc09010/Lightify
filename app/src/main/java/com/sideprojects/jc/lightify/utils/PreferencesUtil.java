@@ -1,4 +1,4 @@
-package com.sideprojects.jc.lightify.preferences;
+package com.sideprojects.jc.lightify.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

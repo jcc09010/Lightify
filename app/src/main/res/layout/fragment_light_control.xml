@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Light Bulb 1"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/light_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/title"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/title_brightness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/brightness"
+        tools:text="Brightness"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:id="@+id/seekbar_brightness"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/title_brightness"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/title_hue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hue"
+        tools:text="Hue"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/seekbar_brightness"
+        app:layout_constraintLeft_toLeftOf="@+id/title_brightness" />
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:id="@+id/seekbar_hue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/title_hue"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/title_saturation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saturation"
+        tools:text="Saturation"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/seekbar_hue"
+        app:layout_constraintLeft_toLeftOf="@+id/title_hue" />
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:id="@+id/seekbar_saturation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/title_saturation"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/title_color_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/color_temp"
+        tools:text="Color Temperature"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/seekbar_saturation"
+        app:layout_constraintLeft_toLeftOf="@+id/title_saturation" />
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:id="@+id/seekbar_color_temp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/title_color_temp" />
+
+</android.support.constraint.ConstraintLayout>

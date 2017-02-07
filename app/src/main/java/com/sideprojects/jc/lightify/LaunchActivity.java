@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.control.ControlActivity;
 import com.sideprojects.jc.lightify.discovery.DiscoveryActivity;
-import com.sideprojects.jc.lightify.preferences.PreferencesUtil;
+import com.sideprojects.jc.lightify.utils.PreferencesUtil;
 
 /**
  * Created by justin.chu on 2/5/17.

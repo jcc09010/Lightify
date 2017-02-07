@@ -11,7 +11,7 @@ import com.sideprojects.jc.lightify.R;
 import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.apis.philips.hue.messeging.HueBridge;
 import com.sideprojects.jc.lightify.control.ControlActivity;
-import com.sideprojects.jc.lightify.preferences.PreferencesUtil;
+import com.sideprojects.jc.lightify.utils.PreferencesUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +36,9 @@ public class OnboardingActivity extends AppCompatActivity {
         if(getIntent().hasExtra(HueBridge.TAG)){
             mBridge = getIntent().getParcelableExtra(HueBridge.TAG);
         }
-        showPressHuePrompt();
+        if(savedInstanceState == null){
+            showPressHuePrompt();
+        }
     }
 
     private void showPressHuePrompt(){

@@ -4,37 +4,37 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 
 import com.google.gson.annotations.SerializedName;
-import com.sideprojects.jc.lightify.apis.philips.hue.data.LightItem;
+import com.sideprojects.jc.lightify.apis.philips.hue.data.LightState;
 
 /**
  * Created by {@author justin.chu} on 2/6/17.
  */
 public class LightControlRequest {
-    @SerializedName(LightItem.State.KEY_ON)
+    @SerializedName(LightState.KEY_ON)
     public Boolean on;
 
-    @SerializedName(LightItem.State.KEY_BRIGHTNESS)
+    @SerializedName(LightState.KEY_BRIGHTNESS)
     public Integer brightness;
 
-    @SerializedName(LightItem.State.KEY_HUE)
+    @SerializedName(LightState.KEY_HUE)
     public Integer hue;
 
-    @SerializedName(LightItem.State.KEY_SATURATION)
+    @SerializedName(LightState.KEY_SATURATION)
     public Integer saturation;
 
-    @SerializedName(LightItem.State.KEY_XY)
+    @SerializedName(LightState.KEY_XY)
     public Float[] xy;
 
-    @SerializedName(LightItem.State.KEY_ALERT)
+    @SerializedName(LightState.KEY_ALERT)
     public String alert;
 
-    @SerializedName(LightItem.State.KEY_EFFECT)
+    @SerializedName(LightState.KEY_EFFECT)
     public String effect;
 
-    @SerializedName(LightItem.State.KEY_COLOR_TEMP)
+    @SerializedName(LightState.KEY_COLOR_TEMP)
     public Integer colorTemp;
 
-    @SerializedName(LightItem.State.KEY_TRANSITION_TIME)
+    @SerializedName(LightState.KEY_TRANSITION_TIME)
     public Integer transitionTime;
 
     public static class Builder {

@@ -65,7 +65,7 @@ public class LightItemAdapter extends RecyclerView.Adapter<LightItemAdapter.Item
         return mItems.size();
     }
 
-    public class ItemHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
+    public class ItemHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
         private TextView title;
         private SwitchCompat switchButton;
@@ -74,7 +74,15 @@ public class LightItemAdapter extends RecyclerView.Adapter<LightItemAdapter.Item
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.textview_title);
             switchButton = (SwitchCompat) itemView.findViewById(R.id.switch_button);
+            title.setOnClickListener(this);
             switchButton.setOnCheckedChangeListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(getAdapterPosition() > -1 && getAdapterPosition() < mItems.size()){
+                mListener.onItemClicked(mItems.get(getAdapterPosition()));
+            }
         }
 
         @Override

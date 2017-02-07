@@ -27,6 +27,10 @@ public class LightsFragment extends Fragment{
 
     public static final String TAG = LightsFragment.class.getSimpleName();
 
+    public static LightsFragment newInstance() {
+        return new LightsFragment();
+    }
+
     private RecyclerView mRecyclerView;
     private LightItemAdapter mAdapter;
     private Subscription mSubFetchLights;
@@ -58,7 +62,7 @@ public class LightsFragment extends Fragment{
         mAdapter.setItemActionListener(new LightItemAdapter.ItemActionListener() {
             @Override
             public void onItemClicked(LightItem item) {
-
+                ((ControlActivity) getActivity()).showLightControl(item);
             }
 
             @Override

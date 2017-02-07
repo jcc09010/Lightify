@@ -1,5 +1,7 @@
 package com.sideprojects.jc.lightify.apis.philips.hue.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -9,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by justin.chu on 2/5/17.
  */
 
-public class LightItem {
+public class LightItem implements Parcelable {
 
     public static final String TAG = LightItem.class.getSimpleName();
 
@@ -51,7 +53,8 @@ public class LightItem {
     private @Nullable String productId;
 
     @SerializedName(KEY_STATE)
-    private @NonNull State state;
+    private @NonNull
+    LightState state;
 
     public void setId(String id){
         this.id = id;
@@ -102,101 +105,51 @@ public class LightItem {
     }
 
     @NonNull
-    public State state() {
+    public LightState state() {
         return state;
     }
 
-    public static class State {
-
-        public static final String KEY_ON = "on";
-        public static final String KEY_BRIGHTNESS = "bri";
-        public static final String KEY_HUE = "hue";
-        public static final String KEY_SATURATION = "sat";
-        public static final String KEY_EFFECT = "effect";
-        public static final String KEY_XY = "xy";
-        public static final String KEY_COLOR_TEMP = "ct";
-        public static final String KEY_ALERT = "alert";
-        public static final String KEY_COLOR_MODE = "colormode";
-        public static final String KEY_REACHABLE = "reachable";
-        public static final String KEY_TRANSITION_TIME = "transitiontime";
-
-        @SerializedName(KEY_ON)
-        private boolean isOn;
-
-        @SerializedName(KEY_BRIGHTNESS)
-        private int brightness;
-
-        @SerializedName(KEY_HUE)
-        private int hue;
-
-        @SerializedName(KEY_SATURATION)
-        private int saturation;
-
-        @SerializedName(KEY_EFFECT)
-        private String effect;
-
-        @SerializedName(KEY_XY)
-        private float[] xy;
-
-        @SerializedName(KEY_COLOR_TEMP)
-        private int colorTemperature;
-
-        @SerializedName(KEY_ALERT)
-        private String alert;
-
-        @SerializedName(KEY_COLOR_MODE)
-        private String colorMode;
-
-        @SerializedName(KEY_REACHABLE)
-        private boolean reachable;
-
-        public boolean isOn() {
-            return isOn;
-        }
-
-        public int brightness() {
-            return brightness;
-        }
-
-        public int hue() {
-            return hue;
-        }
-
-        public int saturation() {
-            return saturation;
-        }
-
-        public String effect() {
-            return effect;
-        }
-
-        public float[] xy() {
-            return xy;
-        }
-
-        public float x(){
-            return xy[0];
-        }
-
-        public float y(){
-            return xy[1];
-        }
-
-        public int colorTemperature() {
-            return colorTemperature;
-        }
-
-        public String alert() {
-            return alert;
-        }
-
-        public String colorMode() {
-            return colorMode;
-        }
-
-        public boolean isReachable() {
-            return reachable;
-        }
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.type);
+        dest.writeString(this.name);
+        dest.writeString(this.modelId);
+        dest.writeString(this.manufacturer);
+        dest.writeString(this.uid);
+        dest.writeString(this.softwareVersion);
+        dest.writeString(this.softwareConfig);
+        dest.writeString(this.productId);
+        dest.writeParcelable(this.state, flags);
+    }
+
+    protected LightItem(Parcel in) {
+        this.id = in.readString();
+        this.type = in.readString();
+        this.name = in.readString();
+        this.modelId = in.readString();
+        this.manufacturer = in.readString();
+        this.uid = in.readString();
+        this.softwareVersion = in.readString();
+        this.softwareConfig = in.readString();
+        this.productId = in.readString();
+        this.state = in.readParcelable(LightState.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<LightItem> CREATOR = new Parcelable.Creator<LightItem>() {
+        @Override
+        public LightItem createFromParcel(Parcel source) {
+            return new LightItem(source);
+        }
+
+        @Override
+        public LightItem[] newArray(int size) {
+            return new LightItem[size];
+        }
+    };
 }

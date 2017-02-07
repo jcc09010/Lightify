@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.sideprojects.jc.lightify.R;
 import com.sideprojects.jc.lightify.apis.philips.hue.messeging.HueBridge;
-import com.sideprojects.jc.lightify.preferences.PreferencesUtil;
+import com.sideprojects.jc.lightify.utils.PreferencesUtil;
 
 /**
  * Created by justin.chu on 2/5/17.

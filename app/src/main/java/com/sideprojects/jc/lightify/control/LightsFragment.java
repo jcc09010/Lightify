@@ -11,8 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sideprojects.jc.lightify.R;
-import com.sideprojects.jc.lightify.apis.philips.hue.LightItem;
 import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
+import com.sideprojects.jc.lightify.apis.philips.hue.data.LightItem;
+import com.sideprojects.jc.lightify.apis.philips.hue.messeging.LightControlRequest;
 import com.sideprojects.jc.lightify.view.MarginItemDecoration;
 
 import rx.Subscription;
@@ -62,7 +63,7 @@ public class LightsFragment extends Fragment{
 
             @Override
             public void onItemSwitched(LightItem item, boolean isOn) {
-                LightItem.RequestBuilder builder = LightItem.RequestBuilder.start()
+                LightControlRequest.Builder builder = LightControlRequest.Builder.start()
                         .setOn(isOn)
                         .setTransitionTime(10);
                 if(isOn){

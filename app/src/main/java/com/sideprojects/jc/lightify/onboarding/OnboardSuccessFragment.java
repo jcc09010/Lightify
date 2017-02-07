@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.apis.philips.hue.messeging.HueBridge;
 import com.sideprojects.jc.lightify.preferences.PreferencesUtil;
 
 /**
@@ -22,10 +22,10 @@ public class OnboardSuccessFragment extends Fragment {
 
     public static final String TAG = OnboardSuccessFragment.class.getSimpleName();
 
-    public static OnboardSuccessFragment newInstance(@NonNull PhilipsHueService.Bridge bridge,
+    public static OnboardSuccessFragment newInstance(@NonNull HueBridge bridge,
                                                      @NonNull String userId) {
         Bundle args = new Bundle();
-        args.putParcelable(PhilipsHueService.Bridge.TAG, bridge);
+        args.putParcelable(HueBridge.TAG, bridge);
         args.putString(PreferencesUtil.PREFERENCE_USER_ID, userId);
         OnboardSuccessFragment fragment = new OnboardSuccessFragment();
         fragment.setArguments(args);
@@ -40,8 +40,8 @@ public class OnboardSuccessFragment extends Fragment {
         TextView userIdView = (TextView) view.findViewById(R.id.textview_user_id);
         Button startControlButton = (Button) view.findViewById(R.id.button_start_control);
 
-        if(getArguments().containsKey(PhilipsHueService.Bridge.TAG)){
-            PhilipsHueService.Bridge bridge = getArguments().getParcelable(PhilipsHueService.Bridge.TAG);
+        if(getArguments().containsKey(HueBridge.TAG)){
+            HueBridge bridge = getArguments().getParcelable(HueBridge.TAG);
             bridgeInfoView.setText(String.format(getString(R.string.bridge_info),
                     bridge.name(),
                     bridge.mac(),

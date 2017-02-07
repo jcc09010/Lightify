@@ -1,11 +1,11 @@
 package com.sideprojects.jc.lightify.discovery;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.apis.philips.hue.messeging.HueBridge;
 import com.sideprojects.jc.lightify.onboarding.OnboardingActivity;
 
 /**
@@ -20,9 +20,9 @@ public class DiscoveryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_discovery);
     }
 
-    public void startOnboarding(PhilipsHueService.Bridge bridge){
+    public void startOnboarding(HueBridge bridge){
         Intent intent = new Intent(this, OnboardingActivity.class);
-        intent.putExtra(PhilipsHueService.Bridge.TAG, bridge);
+        intent.putExtra(HueBridge.TAG, bridge);
         startActivity(intent);
         finish();
     }

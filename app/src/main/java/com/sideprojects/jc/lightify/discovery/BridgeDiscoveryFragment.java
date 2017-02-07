@@ -13,8 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
+import com.sideprojects.jc.lightify.apis.philips.hue.messeging.HueBridge;
 import com.sideprojects.jc.lightify.view.MarginItemDecoration;
 
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public class BridgeDiscoveryFragment extends Fragment {
         super.onSaveInstanceState(outState);
         if(mAdapter.getItems().isEmpty()){
             outState.putParcelableArrayList(TAG_DISCOVERED_BRIDGES,
-                    (ArrayList<PhilipsHueService.Bridge>) mAdapter.getItems());
+                    (ArrayList<HueBridge>) mAdapter.getItems());
         }
     }
 }

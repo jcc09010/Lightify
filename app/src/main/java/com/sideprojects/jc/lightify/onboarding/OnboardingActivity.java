@@ -7,8 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
+import com.sideprojects.jc.lightify.apis.philips.hue.messeging.HueBridge;
 import com.sideprojects.jc.lightify.control.ControlActivity;
 import com.sideprojects.jc.lightify.preferences.PreferencesUtil;
 
@@ -25,15 +26,15 @@ public class OnboardingActivity extends AppCompatActivity {
 
     public static final String TAG = OnboardingActivity.class.getSimpleName();
 
-    private PhilipsHueService.Bridge mBridge;
+    private HueBridge mBridge;
     private Subscription mSubOnboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
-        if(getIntent().hasExtra(PhilipsHueService.Bridge.TAG)){
-            mBridge = getIntent().getParcelableExtra(PhilipsHueService.Bridge.TAG);
+        if(getIntent().hasExtra(HueBridge.TAG)){
+            mBridge = getIntent().getParcelableExtra(HueBridge.TAG);
         }
         showPressHuePrompt();
     }
@@ -54,7 +55,7 @@ public class OnboardingActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void showSuccessFragment(@NonNull PhilipsHueService.Bridge bridge, @NonNull String userId){
+    private void showSuccessFragment(@NonNull HueBridge bridge, @NonNull String userId){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, OnboardSuccessFragment.newInstance(bridge, userId), OnboardSuccessFragment.TAG)
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)

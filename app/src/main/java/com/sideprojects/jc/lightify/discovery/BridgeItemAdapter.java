@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.sideprojects.jc.lightify.apis.philips.hue.PhilipsHueService;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.apis.philips.hue.messeging.HueBridge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,24 +22,24 @@ import java.util.List;
 public class BridgeItemAdapter extends RecyclerView.Adapter<BridgeItemAdapter.ItemHolder> {
 
     public interface ItemClickListener {
-        void onBridgeItemClicked(PhilipsHueService.Bridge bridge);
+        void onBridgeItemClicked(HueBridge bridge);
     }
 
-    private @NonNull List<PhilipsHueService.Bridge> mItems;
+    private @NonNull List<HueBridge> mItems;
     private ItemClickListener mListener;
 
     public BridgeItemAdapter(){
         mItems = new ArrayList<>();
     }
 
-    public void setItems(List<PhilipsHueService.Bridge> items){
+    public void setItems(List<HueBridge> items){
         mItems.clear();
         if(items != null) {
             mItems.addAll(items);
         }
     }
 
-    public @NonNull List<PhilipsHueService.Bridge> getItems(){
+    public @NonNull List<HueBridge> getItems(){
         return mItems;
     }
 
@@ -59,7 +59,7 @@ public class BridgeItemAdapter extends RecyclerView.Adapter<BridgeItemAdapter.It
             return;
         }
         Resources res = holder.itemView.getResources();
-        PhilipsHueService.Bridge bridge = mItems.get(position);
+        HueBridge bridge = mItems.get(position);
         holder.nameView.setText(bridge.name() != null ? bridge.name() : res.getString(R.string.no_bridge_name));
         holder.macView.setText(bridge.mac());
         holder.ipView.setText(bridge.ip());

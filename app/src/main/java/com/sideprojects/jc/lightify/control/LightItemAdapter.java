@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.sideprojects.jc.lightify.apis.philips.hue.LightItem;
 import com.sideprojects.jc.lightify.R;
+import com.sideprojects.jc.lightify.apis.philips.hue.data.LightItem;
 
 import java.util.ArrayList;
 import java.util.List;
